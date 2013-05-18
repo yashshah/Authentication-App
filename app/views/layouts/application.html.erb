@@ -8,29 +8,33 @@
 </head>
 <body>
 	<div class="navbar navbar-fixed-top navbar-inverse">
-	<div class="navbar-inner">
-		<div id="container">
- 		 	
- 		 	<a href="www.areysun.com" class="brand"> www.areysun.com</a>
-  			<ul class="nav pull-right">
-		    	
-		    	<% if @current_user %>
-					<li>Signed in as <%= @current_user.name %>
-					<li><%= link_to "Log Out", logout_path%>
-				<% else %>
-					<li><%= link_to "Twitter", "/auth/twitter" %></li>
-     				<li><%= link_to "Github", "/auth/github" %></li>
-     				<li><%= link_to "Facebook", "/auth/facebook" %></li>
-				<% end %>
-		    </ul>
+		<div class="navbar-inner">
+			<div id="container">
+	 		 	
+	 		 	<a href="www.areysun.com" class="brand"> My Authentication App</a>
+	  			<ul class="nav pull-right">
+			    	
+			    	<% if @current_user %>
+						<li>Signed in as <%= @current_user.name %>
+						<li><%= link_to "Log Out", logout_path%>
+					<% else %>
+						<li><%= link_to "Twitter", "/auth/twitter" %></li>
+	     				<li><%= link_to "Github", "/auth/github" %></li>
+	     				<li><%= link_to "Facebook", "/auth/facebook" %></li>
+					<% end %>
+			    </ul>
 
-        </div>
-        <%= yield %>
-      	<% flash.each do |name, msg| %>
-	        <%= content_tag :div, msg, id: "flash_#{name}" %>
-	    <% end %>
+	        </div>
+		</div>
 	</div>
-</div>
-    
+	<div class="container">
+	<% flash.each do |type, message| %>
+		<div class="alert <%= flash_class type %>">
+			<button class="close" data-dismiss="alert">x</button>
+			<%= message %>
+		</div>
+		<% end %>
+        <%= yield %>
+	</div>	
 </body>
 </html>
